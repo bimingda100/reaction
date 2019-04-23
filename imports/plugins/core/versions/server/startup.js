@@ -37,7 +37,9 @@ appEvents.on("afterCoreInit", () => {
       Logger.fatal(`Upgrade to a version of Reaction containing migration ${currentMigrationVersion} or higher.`);
       Logger.fatal("If you really want to downgrade to this version, you should restore your DB to a previous state from your backup.");
       process.exit(0);
-    } else if (!Meteor.isAppTest) {
+    }
+
+    if (!Meteor.isAppTest) {
       try {
         Migrations.migrateTo("latest");
       } catch (error) {
